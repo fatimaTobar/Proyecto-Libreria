@@ -2,20 +2,52 @@ package com.distribuida.entities;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import org.springframework.stereotype.Component;
+
+
+@Component
+@Entity
+@Table(name="factura")
 public class Factura {
 	
+	//Tipos de Relaciones en Java
 	
+	//@OneToOne    .- 1:1
+	//@OneToMany   .-1:N
+	//@ManyToOne   .-N
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_factura")
 	private int idFactura;
-	private String numFactura;
-	private Date fecha;
-	private double totalNeto;
+	@Column(name = "num_factura")
+    private String numFactura;
+	@Column(name = "fecha")
+    private Date fecha;
+	@Column(name = "total_neto")
+    private double totalNeto;
+	@Column(name = "iva")
 	private double iva;
+	@Column(name = "total")
 	private double total;
 	//private int idCliente;
+	
+	@JoinColumn(name = "id_cliente")
+    @ManyToOne(cascade = { CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
 	private Cliente cliente;
 	
-    private Factura(){ }
-
+	
+    public Factura(){ }
 
     public Factura(int idFactura, String numFactura, Date fecha, double totalNeto, double iva, double total) {
 	this.idFactura = idFactura;

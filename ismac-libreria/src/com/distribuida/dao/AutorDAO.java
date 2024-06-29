@@ -11,6 +11,7 @@ public interface AutorDAO {
 	
 	public Autor findOne(int id);
 	
+	
 	public void add(Autor autor);
 	
 	public void up(Autor autor);
