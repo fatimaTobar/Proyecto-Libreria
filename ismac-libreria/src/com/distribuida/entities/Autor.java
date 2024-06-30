@@ -1,10 +1,13 @@
 package com.distribuida.entities;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
@@ -33,6 +36,11 @@ public class Autor {
 	private String telefono;
 	@Column(name = "correo")
 	private String correo;
+	
+	@JoinColumn(name = "id_autor")
+    @ManyToOne(cascade = { CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
+	private Autor autor;
+	
 	
 	public Autor () { }
 

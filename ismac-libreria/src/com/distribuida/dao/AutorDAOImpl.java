@@ -13,9 +13,9 @@ import com.distribuida.entities.Autor;
 
 
 @Repository
-public class AutorDAOImpl implements AutorDAO {
+	public abstract class AutorDAOImpl implements AutorDAO {
 
-	
+													
 	@Autowired
 	private SessionFactory sessionFactory;
 	
@@ -25,31 +25,39 @@ public class AutorDAOImpl implements AutorDAO {
 	public List<Autor> findAll() {
 		// TODO Auto-generated method stub
 		Session session = sessionFactory.getCurrentSession();
-		return session.createQuery(" from Autor", Autor.class).getResultList();
+		return session.createQuery(" from Autor").getResultList();
 	}
 
 	@Override
+	@Transactional
 	public Autor findOne(int id) {
 		// TODO Auto-generated method stub
-		return null;
+		Session session = sessionFactory.getCurrentSession();
+		return session.get(Autor.class,id);
 	}
 
 	@Override
+	@Transactional
 	public void add(Autor autor) {
 		// TODO Auto-generated method stub
-
+        Session session = sessionFactory.getCurrentSession();
+        session.saveOrUpdate(autor);
 	}
 
 	@Override
+	@Transactional
 	public void up(Autor autor) {
 		// TODO Auto-generated method stub
-
+         Session session = sessionFactory.getCurrentSession();
+         session.saveOrUpdate(autor);
 	}
 
 	@Override
+	@Transactional
 	public void del(int id) {
 		// TODO Auto-generated method stub
-
+        Session session =sessionFactory.getCurrentSession();
+        session.delete(findOne(id));
 	}
 
 }

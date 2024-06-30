@@ -17,5 +17,8 @@ public interface AutorDAO {
 	public void up(Autor autor);
 	
 	public void del(int id);
+
+	public void save(String autor);
+
 		
 }
